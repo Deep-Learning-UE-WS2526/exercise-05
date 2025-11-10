@@ -1,11 +1,11 @@
 # Exercise 5: Logistic Regression with `scikit-learn`
 
-Deadline: 28.11.2023 23:59
+Deadline: 13.11.2025 23:59
 
 This is the fifth exercise, and it covers initial steps for doing a logistic regression task with scikit-learn. Reading documentation for [`pandas`](https://pandas.pydata.org/docs/reference/index.html) and [`scikit-learn`](https://scikit-learn.org/stable/modules/classes.html) is part of the exercise.
 
 ## Step 1
-Clone this repository to your local computer. On the command line, you would use the following command: `git clone https://github.com/IDH-Cologne-Deep-Learning-Uebung/exercise-05`.
+Clone this repository to your local computer. On the command line, you would use the following command: `git clone https://github.com/Deep-Learning-UE-WS2526/exercise-05`.
 
 ## Step 2
 Create a new branch in the repository, named after your UzK-account: `git checkout -b "UZKACCOUNT"`
