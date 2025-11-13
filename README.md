@@ -1,6 +1,6 @@
 # Exercise 5: Logistic Regression with `scikit-learn`
 
-Deadline: 13.11.2025 23:59
+Deadline: 19.11.2025 23:59
 
 This is the fifth exercise, and it covers initial steps for doing a logistic regression task with scikit-learn. Reading documentation for [`pandas`](https://pandas.pydata.org/docs/reference/index.html) and [`scikit-learn`](https://scikit-learn.org/stable/modules/classes.html) is part of the exercise.
 
