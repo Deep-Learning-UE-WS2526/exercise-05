@@ -1,7 +1,8 @@
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 # read the data from a CSV file (included in the repository)
-
 df = pd.read_csv("data/train.csv")
 
 # ## Step 3
@@ -9,14 +10,9 @@ df = pd.read_csv("data/train.csv")
 del df["Name"]
 del df["PassengerId"]
 
-
 # 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are 
 # "Sex", 
-for x in df.index:
-    if df.loc[x, "Sex"] == "female":
-        df.loc[x, "Sex"] = 0
-    elif df.loc[x, "Sex"] == "male":
-        df.loc[x, "Sex"] = 1
+df["Sex"] = df["Sex"].replace(["female","male"],[0,1])
 # "Cabin",
 df.dropna(inplace = True) # löscht alle missing values, funktioniert sonst nicht
 for x in df.index:
@@ -31,17 +27,11 @@ for x in df.index:
             break
     df.loc[x, "Cabin"] = newCabin
 df["Cabin"] = pd.to_numeric(df["Cabin"], errors="coerce")
-
 # "Ticket",
 df["Ticket"] = pd.to_numeric(df["Ticket"], errors="coerce")
 # and "Embarked".
-for x in df.index:
-    if df.loc[x, "Embarked"] == "S":
-        df.loc[x, "Embarked"] = 0
-    elif df.loc[x, "Embarked"] == "C":
-        df.loc[x, "Embarked"] = 1
-    elif df.loc[x, "Embarked"] == "Q":
-        df.loc[x, "Embarked"] = 2
+df["Embarked"] = df["Embarked"].replace(["S","C", "Q"],[0,1,2])
+
 # 3. Remove all rows that contain missing values
 df.dropna(inplace = True)
 print(df)
