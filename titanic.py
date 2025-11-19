@@ -1,17 +1,55 @@
 import pandas as pd
 
 # read the data from a CSV file (included in the repository)
-df = pd.read_csv("data/train.csv")
 
+df = pd.read_csv("data/train.csv")
 
 # ## Step 3
 # 1. Remove the columns "Name" and "PassengerId" (because we know they are irrelevant for our problem).
-# 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are "Sex", "Cabin", "Ticket" and "Embarked".
-# 3. Remove all rows that contain missing values
+del df["Name"]
+del df["PassengerId"]
 
+
+# 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are 
+# "Sex", 
+for x in df.index:
+    if df.loc[x, "Sex"] == "female":
+        df.loc[x, "Sex"] = 0
+    elif df.loc[x, "Sex"] == "male":
+        df.loc[x, "Sex"] = 1
+# "Cabin",
+df.dropna(inplace = True) # löscht alle missing values, funktioniert sonst nicht
+for x in df.index:
+    newCabin = ""
+    for c in df.loc[x, "Cabin"]:
+        if c.isalpha():
+            newCabin = newCabin + str(ord(c))
+            newCabin = newCabin + "."
+        elif c.isdigit():
+            newCabin = newCabin + str(c)
+        else:
+            break
+    df.loc[x, "Cabin"] = newCabin
+df["Cabin"] = pd.to_numeric(df["Cabin"], errors="coerce")
+
+# "Ticket",
+df["Ticket"] = pd.to_numeric(df["Ticket"], errors="coerce")
+# and "Embarked".
+for x in df.index:
+    if df.loc[x, "Embarked"] == "S":
+        df.loc[x, "Embarked"] = 0
+    elif df.loc[x, "Embarked"] == "C":
+        df.loc[x, "Embarked"] = 1
+    elif df.loc[x, "Embarked"] == "Q":
+        df.loc[x, "Embarked"] = 2
+# 3. Remove all rows that contain missing values
+df.dropna(inplace = True)
+print(df)
 
 # ## Step 4
-# 1. As a next step, we need to split the input features from the training labels. This can be done easily with `pandas`.
+# 1. As a next step, we need to split the input features from the training labels.
+# This can be done easily with `pandas`.
+
 # 2. Secondly, we need to split training and test data. This can be done with the function [`sklearn.model_selection.train_test_split()`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split) from the `scikit-learn` library.
 # 3. Finally, initialize a LogisticRegression object with a `liblinear` solver, and fit it to the training data.
 # 4. Lastly, calculate precision/recall/f-score on the test data using the appropriate functions from `scikit-learn`.
